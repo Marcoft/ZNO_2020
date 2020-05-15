@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    style="@style/AppTheme"
+    tools:context=".OneExtra">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:onClick="finish"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_gravity="center"
+            android:typeface="serif"
+            android:textStyle="bold"
+            android:id="@+id/moves"
+            android:text="Один зайвий"
+            android:textSize="23dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="9dp"
+        android:id="@+id/life"
+        android:layout_below="@id/liner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:typeface="serif"
+            android:id="@+id/RESULT_SCORE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#000000"
+            android:textSize="35dp"/>
+
+        <ImageView
+            android:layout_toLeftOf="@id/life2"
+            android:id="@+id/life1"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/life_in"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            />
+
+        <ImageView
+            android:layout_toLeftOf="@id/life3"
+            android:id="@+id/life2"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/life_in"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            />
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:id="@+id/life3"
+            android:src="@drawable/life_in"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/liner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:typeface="serif"
+            android:id="@+id/Question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Знайди зайве"
+            android:textColor="#000000"
+            android:textSize="20dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="10dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:onClick="ClickExtra"
+            android:enabled="false"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/one"
+            android:background="@drawable/roundebutton"
+            android:textSize="15sp"
+            android:layout_width="250dp"
+            android:layout_height="match_parent" />
+        <Button
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:enabled="false"
+            android:onClick="ClickExtra"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/two"
+            android:background="@drawable/roundebutton"
+            android:textSize="15sp"
+            android:layout_width="250dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:enabled="false"
+            android:onClick="ClickExtra"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/three"
+            android:background="@drawable/roundebutton"
+            android:textSize="15sp"
+            android:layout_width="250dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:enabled="false"
+            android:onClick="ClickExtra"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/four"
+            android:background="@drawable/roundebutton"
+            android:textSize="15sp"
+            android:layout_width="250dp"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:padding="8dp"
+            android:textColor="#ffffff"
+            android:enabled="false"
+            android:onClick="ClickExtra"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/five"
+            android:background="@drawable/roundebutton"
+            android:textSize="15sp"
+            android:layout_width="250dp"
+            android:layout_height="match_parent" />
+
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:typeface="serif"
+        android:textColor="#000000"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/start"
+        android:onClick="startGame"
+        android:background="@color/color2"
+        android:text="Почати"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_marginTop="7dp"
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:layout_marginLeft="6dp"
+        android:src="@drawable/main_icon"
+        android:clickable="false"
+        android:layout_width="120dp"
+        android:layout_height="120dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+        <Button
+            android:typeface="serif"
+            android:background="@drawable/sumabutton2"
+            android:textColor="#fff"
+            android:onClick="Test"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="3dp"
+            android:textSize="15sp"
+            android:text="Тест"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:typeface="serif"
+            android:background="@drawable/sumabutton2"
+            android:textColor="#fff"
+            android:onClick="Victoryna"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:text="Зно попередніх років"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:typeface="serif"
+            android:background="@drawable/sumabutton2"
+            android:textColor="#fff"
+            android:onClick="StatisticaTotal"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:text="Загальна статистика"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:typeface="serif"
+            android:background="@drawable/sumabutton2"
+            android:textColor="#fff"
+            android:onClick="TrueFalse"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:text="Правда чи Брехня"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:typeface="serif"
+            android:background="@drawable/sumabutton2"
+            android:textColor="#fff"
+            android:onClick="FindMatch"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:text="Знайди Відповідність"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:typeface="serif"
+            android:background="@drawable/sumabutton2"
+            android:textColor="#fff"
+            android:onClick="OneExtra"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:text="Один Зайвий"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:typeface="serif"
+            android:background="@drawable/sumabutton2"
+            android:textColor="#fff"
+            android:onClick="ShareFriends"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:text="Розповісти друзям"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            />
+
+
+
+        <Button
+            android:typeface="serif"
+            android:background="@drawable/sumabutton2"
+            android:textColor="#fff"
+            android:onClick="Exit"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:text="Вийти"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            />
+
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

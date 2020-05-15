@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    style="@style/AppTheme"
+    tools:context=".TrueOrFalse">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginBottom="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:onClick="finish"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back"/>
+
+            <TextView
+                android:paddingRight="10dp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="#000000"
+                android:typeface="serif"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Правда/Брехня"
+                android:textSize="30dp"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:max="26"
+            android:progress="0"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_marginLeft="5dp"
+            android:id="@+id/lin1"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:typeface="serif"
+                android:textStyle="italic"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/time"
+                android:textColor="#000"
+                android:text=" Час: 40  "
+                android:textSize="30dp"
+                />
+
+            <TextView
+                android:typeface="serif"
+                android:layout_marginRight="5dp"
+                android:textStyle="italic"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/score"
+                android:textColor="#000"
+                android:text=" Очки: 0  "
+                android:textSize="30dp"
+                />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/color5"
+        android:layout_weight="5"
+        android:id="@+id/lin2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        >
+
+        <ScrollView
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal"
+                android:typeface="serif"
+                android:text="Питання"
+                android:textSize="30dp"
+                android:id="@+id/text"
+                android:padding="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </ScrollView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:typeface="serif"
+            android:onClick="clickTrue"
+            android:layout_weight="1"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/truee"
+            android:background="@color/color2"
+            android:text="Правда"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Button
+            android:typeface="serif"
+            android:onClick="clickLie"
+            android:layout_weight="1"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:id="@+id/lie"
+            android:background="@color/color2"
+            android:text="Брехня"
+            android:textSize="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:typeface="serif"
+        android:layout_weight="1"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/start"
+        android:onClick="startGame"
+        android:background="@color/color2"
+        android:text="Почати"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    style="@style/AppTheme"
+    android:background="#ffffff"
+    tools:context=".FindaMatch">
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:onClick="finish"
+            android:layout_marginLeft="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_gravity="center"
+            android:typeface="serif"
+            android:textStyle="bold"
+            android:id="@+id/moves"
+            android:text="Знайди відповідність"
+            android:textSize="32sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="9dp"
+        android:id="@+id/life"
+        android:layout_below="@id/liner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:typeface="serif"
+            android:id="@+id/RESULT_SCORE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#000000"
+            android:textSize="50sp"/>
+
+        <ImageView
+            android:layout_toStartOf="@id/life2"
+            android:id="@+id/life1"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/life_in"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            />
+
+        <ImageView
+            android:layout_toStartOf="@id/life3"
+            android:id="@+id/life2"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/life_in"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+           />
+
+        <ImageView
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/life3"
+            android:src="@drawable/life_in"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+           />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/liner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:typeface="serif"
+            android:id="@+id/Question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Знайдіть відповідність між автором та твором"
+            android:textColor="#000000"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:padding="20dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:typeface="serif"
+                android:onClick="ClickAndCheck"
+                android:textColor="#ffffff"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:background="@drawable/roundebutton"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_1"
+                />
+
+            <Button
+                android:typeface="serif"
+                android:onClick="ClickAndCheck"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                android:background="@drawable/roundebutton"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_2"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:typeface="serif"
+                android:onClick="ClickAndCheck"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                android:background="@drawable/roundebutton"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_3"
+                />
+
+            <Button
+                android:typeface="serif"
+                android:onClick="ClickAndCheck"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                android:background="@drawable/roundebutton"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_4"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:typeface="serif"
+                android:onClick="ClickAndCheck"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                android:background="@drawable/roundebutton"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_5"
+                />
+
+            <Button
+                android:typeface="serif"
+                android:onClick="ClickAndCheck"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                android:background="@drawable/roundebutton"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_6"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:typeface="serif"
+                android:onClick="ClickAndCheck"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                android:background="@drawable/roundebutton"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_7"
+                />
+
+            <Button
+                android:typeface="serif"
+                android:onClick="ClickAndCheck"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                android:background="@drawable/roundebutton"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_8"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:typeface="serif"
+                android:onClick="ClickAndCheck"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                android:background="@drawable/roundebutton"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_9"
+                />
+
+            <Button
+                android:typeface="serif"
+                android:onClick="ClickAndCheck"
+                android:padding="10dp"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:textStyle="normal"
+                android:background="@drawable/roundebutton"
+                android:clickable="false"
+                android:enabled="false"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/btn_10"
+                />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

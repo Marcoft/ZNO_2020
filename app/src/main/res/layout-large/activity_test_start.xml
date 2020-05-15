@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".TestStart">
+
+    <LinearLayout
+        android:id="@+id/liner"
+        android:layout_marginTop="13dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:onClick="finish"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:paddingRight="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:typeface="serif"
+            android:textStyle="bold"
+            android:textSize="37dp"
+            android:id="@+id/t_level"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Питання : 1"
+             />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/life"
+        android:layout_below="@id/liner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_centerInParent="true"
+            android:layout_weight="1"
+            android:typeface="serif"
+            android:id="@+id/RESULT_SCORE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#000000"
+            android:textSize="50sp"/>
+
+        <ImageView
+            android:layout_toLeftOf="@id/life2"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/life1"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/life_in"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#ffffff"/>
+
+        <ImageView
+            android:layout_toLeftOf="@id/life3"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/life2"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/life_in"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#ffffff"/>
+
+        <ImageView
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:id="@+id/life3"
+            android:src="@drawable/life_in"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="#ffffff"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@id/life"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <ScrollView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+    <TextView
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textColor="#000"
+        android:id="@+id/t_quest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Питання?"
+        android:gravity="center"
+        android:textSize="33sp"
+        />
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+    <Button
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/roundebutton"
+        android:textColor="#fff"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="18sp"
+        android:id="@+id/btn_answ1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="answer 1"
+        android:onClick="ChechBut"
+        />
+    <Button
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/roundebutton"
+        android:textColor="#fff"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="18sp"
+        android:id="@+id/btn_answ2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="answer 2"
+        android:onClick="ChechBut"
+        />
+    <Button
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/roundebutton"
+        android:textColor="#fff"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="18sp"
+        android:id="@+id/btn_answ3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="answer 3"
+        android:onClick="ChechBut"
+        />
+
+    <Button
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/roundebutton"
+        android:textColor="#fff"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textSize="18sp"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/btn_answ4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="answer 4"
+        android:onClick="ChechBut"
+        />
+
+
+    <Button
+        android:typeface="serif"
+        android:visibility="gone"
+        android:id="@+id/btn_new"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New"
+        />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

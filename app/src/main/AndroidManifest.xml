@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="learn.zno.znostudy">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".TotalStats.TotalStat"></activity>
+        <activity
+            android:name=".OneExtra"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StatisticAfterTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FindaMatch"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TrueOrFalse"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".StatisticAfterZNO"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ChoiseZNOYear"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ZNOTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ThemesQuestions"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TestStart"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

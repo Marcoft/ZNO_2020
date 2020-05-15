@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "learn.zno.znostudy"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 2
+        versionName '1.1'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    def appCompatVersion = "1.1.0"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+
+    def supportVersion = "29.0.0"
+    implementation "com.android.support:support-compat:$supportVersion"
+    implementation "com.android.support:design:$supportVersion"
+
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
