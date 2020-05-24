@@ -1,24 +1,32 @@
 package learn.zno.znostudy;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import learn.zno.znostudy.Recycler.ExampleAdapter;
 import learn.zno.znostudy.Recycler.ExampleItem;
+import learn.zno.znostudy.TotalStats.DateDb.DateDbStats;
+import learn.zno.znostudy.TotalStats.StatsDb.DateDbTotalStats;
 import learn.zno.znostudy.db.DBHelpers;
 
 public class StatisticAfterTest extends AppCompatActivity {
 
-    TextView ans1,ans5,RightAnswers;
+    TextView RightAnswers;
 
     private ArrayList<ExampleItem> mExampleList;
 
@@ -28,19 +36,14 @@ public class StatisticAfterTest extends AppCompatActivity {
 
     DBHelpers dbHelpers;
 
-    //List<String> quest = new ArrayList<>();
-    //List<String> answe1 = new ArrayList<>();
-    //List<String> answe2 = new ArrayList<>();
-    //List<String> answe3 = new ArrayList<>();
-    //List<String> answe4 = new ArrayList<>();
 
     List<String> result = new ArrayList<>();
     List<String> questi = new ArrayList<>();
     List<String> RightAnswer= new ArrayList<>();
 
+    int rightAnswer = 0;
+    int allQuestion = 0;
 
-    List<Integer> k = new ArrayList<>();
-    List<Integer> end = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +56,7 @@ public class StatisticAfterTest extends AppCompatActivity {
         mExampleList = new ArrayList<ExampleItem>();
         result.clear();
         Intent intent = getIntent();
-        /*for(int i = 0; i < intent.getIntExtra("list_k.size",1);i++){
-            k.add(intent.getIntExtra(i + "k",1));
-            end.add(intent.getIntExtra(i + "end",1));
-        }*/
+        allQuestion = intent.getIntExtra("YourAnswer.size",0);
 
         for(int i = 0; i < intent.getIntExtra("YourAnswer.size",1);i++){
             result.add(intent.getStringExtra(String.valueOf(i)));
@@ -65,35 +65,17 @@ public class StatisticAfterTest extends AppCompatActivity {
         }
 
 
-       /* DateDb dateDb = null;
-
-        for(int j = 0; j < questi.size(); j ++){
-            for(int l = 0; l < k.size();l ++){
-                 for (int i = k.get(l); i < end.get(l);i ++){
-                     dateDb = dbHelpers.getDate(i);
-                     if(dateDb.getQuestion().equalsIgnoreCase(questi.get(j))){
-                         quest.add(dateDb.getQuestion());
-                         answe1.add(dateDb.getAnswer1());
-                         answe2.add(dateDb.getAnswer2());
-                         answe3.add(dateDb.getAnswer3());
-                         answe4.add(dateDb.getAnswer4());
-                         RightAnswer.add(dateDb.getAnswer1());
-                     }
-                 }
-            }
-        }*/
-
        for(int i = 1; i <= intent.getIntExtra("YourAnswer.size",1)  ; i ++) {
             mExampleList.add(new ExampleItem("Питання : " + i, questi.get(i-1), RightAnswer.get(i-1), result.get(i-1)));
         }
 
-        int c = 0;
+        rightAnswer = 0;
         for(int i = 0; i < intent.getIntExtra("YourAnswer.size",1); i ++) {
             if(RightAnswer.get(i).equalsIgnoreCase(result.get(i))){
-                c++;
+                rightAnswer++;
             }
         }
-        RightAnswers.setText("Кількість правильних відповідей: " + c);
+        RightAnswers.setText("Кількість правильних відповідей: " + rightAnswer);
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -104,7 +86,38 @@ public class StatisticAfterTest extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+        addDateInADatabase();
+
     }
+
+    int numberStat = 0;
+    int endDate = 0;
+    private void addDateInADatabase (){
+        // Текущее время
+        Date currentDate = new Date();
+        // Форматирование времени как "день.месяц.год"
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        String dateText = dateFormat.format(currentDate);
+        // Форматирование времени как "часы:минуты:секунды"
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        String timeText = timeFormat.format(currentDate);
+
+        List<DateDbTotalStats> listDateDbTotalStats = dbHelpers.getAllTotalStats();
+        List<DateDbStats> listDateDbStats = dbHelpers.getAllDateFromStats();
+
+        numberStat = listDateDbTotalStats.size();
+        endDate = listDateDbStats.size();
+
+        numberStat++;
+        endDate++;
+        dbHelpers.addDataTotalStats(new DateDbTotalStats("Статистика №" + numberStat, "Тест", rightAnswer + "/" + allQuestion, timeText + "  " + dateText, allQuestion,endDate,endDate + allQuestion));
+        for (int i = 1; i <= allQuestion;i ++){
+            dbHelpers.addDataInStats(new DateDbStats(endDate, questi.get(i-1),result.get(i-1), RightAnswer.get(i-1)));
+            endDate++;
+        }
+
+    }
+
 
     @Override
     public void onBackPressed() {

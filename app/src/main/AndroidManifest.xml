@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TotalStats.TotalStat"></activity>
+        <activity android:name=".TotalStats.ChoiseTotalStats"></activity>
+        <activity android:name=".TotalStats.TotalStat" />
         <activity
             android:name=".OneExtra"
             android:screenOrientation="portrait" />

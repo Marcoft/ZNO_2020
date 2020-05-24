@@ -33,53 +33,26 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
 
 
 
-        public TextView numbQuest;
-        public TextView quest;
-        public TextView ans1;
+        private TextView numbQuest;
+        private TextView quest;
+        private TextView ans1;
 
-        public TextView ans5;
+        private TextView ans5;
 
 
-        public ExampleViewHolder(View itemView, final OnItemClickListener listener,List<String> RigAnsw, List<String> answer) {
+        private ExampleViewHolder(View itemView, final OnItemClickListener listener,List<String> RigAnsw, List<String> answer) {
             super(itemView);
             numbQuest = itemView.findViewById(R.id.numbQuest);
             quest = itemView.findViewById(R.id.quest);
             ans1 = itemView.findViewById(R.id.ans1);
-
             ans5 = itemView.findViewById(R.id.ans5);
-
-
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
-
-
-           /* mDeleteImage.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onDeleteClick(position);
-                        }
-                    }
-                }
-            });*/
 
 
         }
     }
 
-    List<String> RigAnsw;
-    List<String> answer;
+    private List<String> RigAnsw;
+    private List<String> answer;
     public ExampleAdapter(ArrayList<ExampleItem> exampleList, List<String> RigAnsw, List<String> answer) {
         mExampleList = exampleList;
         this.RigAnsw = RigAnsw;
@@ -112,43 +85,6 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
             holder.ans5.setTextColor(Color.parseColor("#ff0000"));
         }
 
-
-       /* if (answer.get(position).equalsIgnoreCase(RigAnsw.get(position)) && mExampleList.get(position).getAns1().equalsIgnoreCase(answer.get(position))) {
-            holder.ans1.setTextColor(Color.parseColor("#008000"));
-        } else if (answer.get(position).equalsIgnoreCase(RigAnsw.get(position)) && mExampleList.get(position).getAns2().equalsIgnoreCase(answer.get(position))) {
-            holder.ans2.setTextColor(Color.parseColor("#008000"));
-        } else if (answer.get(position).equalsIgnoreCase(RigAnsw.get(position)) && mExampleList.get(position).getAns3().equalsIgnoreCase(answer.get(position))) {
-            holder.ans3.setTextColor(Color.parseColor("#008000"));
-        } else if (answer.get(position).equalsIgnoreCase(RigAnsw.get(position)) && mExampleList.get(position).getAns4().equalsIgnoreCase(answer.get(position))) {
-            holder.ans4.setTextColor(Color.parseColor("#008000"));
-        } else if (answer.get(position).equalsIgnoreCase(RigAnsw.get(position)) && mExampleList.get(position).getAns5().equalsIgnoreCase(answer.get(position))) {
-            holder.ans5.setTextColor(Color.parseColor("#008000"));
-        } else {
-
-            if (mExampleList.get(position).getAns1().equalsIgnoreCase(answer.get(position))) {
-                holder.ans1.setTextColor(Color.parseColor("#ff0000"));
-            } else if (mExampleList.get(position).getAns2().equalsIgnoreCase(answer.get(position))) {
-                holder.ans2.setTextColor(Color.parseColor("#ff0000"));
-            } else if (mExampleList.get(position).getAns3().equalsIgnoreCase(answer.get(position))) {
-                holder.ans3.setTextColor(Color.parseColor("#ff0000"));
-            } else if (mExampleList.get(position).getAns4().equalsIgnoreCase(answer.get(position))) {
-                holder.ans4.setTextColor(Color.parseColor("#ff0000"));
-            } else if (mExampleList.get(position).getAns5().equalsIgnoreCase(answer.get(position))) {
-                holder.ans5.setTextColor(Color.parseColor("#ff0000"));
-            }
-
-            if (mExampleList.get(position).getAns1().equalsIgnoreCase(RigAnsw.get(position))) {
-                holder.ans1.setTextColor(Color.parseColor("#008000"));
-            } else if (mExampleList.get(position).getAns2().equalsIgnoreCase(RigAnsw.get(position))) {
-                holder.ans2.setTextColor(Color.parseColor("#008000"));
-            } else if (mExampleList.get(position).getAns3().equalsIgnoreCase(RigAnsw.get(position))) {
-                holder.ans3.setTextColor(Color.parseColor("#008000"));
-            } else if (mExampleList.get(position).getAns4().equalsIgnoreCase(RigAnsw.get(position))) {
-                holder.ans4.setTextColor(Color.parseColor("#008000"));
-            } else if (mExampleList.get(position).getAns5().equalsIgnoreCase(RigAnsw.get(position))) {
-                holder.ans5.setTextColor(Color.parseColor("#008000"));
-            }
-        }*/
 
 
     }

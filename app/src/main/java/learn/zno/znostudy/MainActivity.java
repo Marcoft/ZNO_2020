@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import learn.zno.znostudy.TotalStats.ChoiseTotalStats;
 import learn.zno.znostudy.TotalStats.TotalStat;
 import learn.zno.znostudy.db.DBHelpers;
 import learn.zno.znostudy.db.DateDb;
@@ -46,9 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     MyTask mt;
 
-
-
-    class MyTask extends AsyncTask<Void, Void, Void> {
+    private class MyTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void StatisticaTotal(View view) {
-        Intent intent = new Intent(this, TotalStat.class);
+        Intent intent = new Intent(this, ChoiseTotalStats.class);
         startActivity(intent);
     }
 
@@ -145,12 +144,12 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         }
-        if(requestCode == 2){
+        /*if(requestCode == 2){
 
         }
         if(requestCode == 3){
 
-        }
+        }*/
         super.onActivityResult(requestCode, resultCode, data);
     }
 

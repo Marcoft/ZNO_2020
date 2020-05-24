@@ -339,7 +339,7 @@ public class TrueOrFalse extends AppCompatActivity {
             @Override
             public void onFinish() {
                 i++;
-                progressBar.setProgress(26);
+                progressBar.setProgress(41);
                 truee.setEnabled(true);
                 lie.setEnabled(true);
                 Handler handler = new Handler();

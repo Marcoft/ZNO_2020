@@ -1,26 +1,35 @@
 package learn.zno.znostudy;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import learn.zno.znostudy.Recycler.ExampleAdapter;
 import learn.zno.znostudy.Recycler.ExampleItem;
+import learn.zno.znostudy.TotalStats.DateDb.DateDbStats;
+import learn.zno.znostudy.TotalStats.StatsDb.DateDbTotalStats;
 import learn.zno.znostudy.db.DBHelpers;
 import learn.zno.znostudy.db.DateDb;
 
 public class StatisticAfterZNO extends AppCompatActivity {
 
 
-    TextView ans1,ans5,RightAnswers;
+    TextView RightAnswers;
 
     private ArrayList<ExampleItem> mExampleList;
 
@@ -39,6 +48,8 @@ public class StatisticAfterZNO extends AppCompatActivity {
     List<String> result = new ArrayList<>();
     List<String> RightAnswer= new ArrayList<>();
 
+    int rightAnswers;
+
     int k = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +57,7 @@ public class StatisticAfterZNO extends AppCompatActivity {
         setContentView(R.layout.activity_statistic_after_z_n_o);
 
         dbHelpers = new DBHelpers(this);
+
         RightAnswers = (TextView) findViewById(R.id.RightAnswers);
 
 
@@ -75,17 +87,6 @@ public class StatisticAfterZNO extends AppCompatActivity {
         result.add(intent.getStringExtra("20"));
 
 
-        /*List<DateDb> dates = dbHelpers.getAllContacts();
-        for (DateDb dat : dates) {
-            quest.add(dat.getQuestion());
-            answe1.add(dat.getAnswer1());
-            answe2.add(dat.getAnswer2());
-            answe3.add(dat.getAnswer3());
-            answe4.add(dat.getAnswer4());
-            answe5.add(dat.getAnswer5());
-            RightAnswer.add(dat.getAnswer1());
-        }*/
-
         DateDb dateDb = null;
 
         for (int i = k; i < k+20;i ++){
@@ -100,16 +101,16 @@ public class StatisticAfterZNO extends AppCompatActivity {
         }
 
         for(int i = 1; i <= 20; i ++) {
-            mExampleList.add(new ExampleItem("Питання : " + i, quest.get(i-1), answe1.get(i-1), answe5.get(i-1)));
+            mExampleList.add(new ExampleItem("Питання : " + i, quest.get(i-1), answe1.get(i-1), result.get(i-1)));
         }
 
-        int c = 0;
+        rightAnswers = 0;
         for(int i = 0; i < 20; i ++) {
             if(RightAnswer.get(i).equalsIgnoreCase(result.get(i))){
-                c++;
+                rightAnswers++;
             }
         }
-        RightAnswers.setText("Кількість правильних відповідей: " + c);
+        RightAnswers.setText("Кількість правильних відповідей: " + rightAnswers);
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -120,15 +121,72 @@ public class StatisticAfterZNO extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
+
+        addDateInADatabase();
+       // mt = new MyTask();  //TODO Another Thread for Adding BD
+       // mt.execute();
+
     }
+
+    MyTask mt;
+   private class MyTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            addDateInADatabase(); // Add Bd Date
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+        }
+    }
+
+
+    int numberStat = 0;
+    int endDate = 0;
+    private void addDateInADatabase (){
+        // Текущее время
+        Date currentDate = new Date();
+        // Форматирование времени как "день.месяц.год"
+        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        String dateText = dateFormat.format(currentDate);
+        // Форматирование времени как "часы:минуты:секунды"
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+        String timeText = timeFormat.format(currentDate);
+
+        List<DateDbTotalStats> listDateDbTotalStats = dbHelpers.getAllTotalStats();
+        List<DateDbStats> listDateDbStats = dbHelpers.getAllDateFromStats();
+
+        numberStat = listDateDbTotalStats.size();
+        endDate = listDateDbStats.size();
+
+        numberStat++;
+        endDate++;
+        dbHelpers.addDataTotalStats(new DateDbTotalStats("Статистика №" + numberStat, "ЗНО", rightAnswers + "/20", timeText + "  " + dateText, 20, endDate, endDate + 20 ));
+        for (int i = 1; i <= 20;i ++){
+            dbHelpers.addDataInStats(new DateDbStats(endDate, quest.get(i-1),result.get(i-1), answe1.get(i-1)));
+            endDate++;
+        }
+
+    }
+
 
     @Override
     public void onBackPressed() {
+        dbHelpers.close();
         finish();
         super.onBackPressed();
     }
 
     public void EndActivity(View view) {
+        dbHelpers.close();
         finish();
     }
 }
