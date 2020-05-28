@@ -1,12 +1,9 @@
 package learn.zno.znostudy.TotalStats;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,7 +31,6 @@ public class TotalStat extends AppCompatActivity {
     private List<String> questi = new ArrayList<>();
     private List<String> RightAnswer= new ArrayList<>();
 
-    private SQLiteDatabase sb;
     private DBHelpers dbHelpers;
 
     private TextView RightAnswers;
@@ -62,7 +58,7 @@ public class TotalStat extends AppCompatActivity {
         RightAnswers = findViewById(R.id.RightAnswers);
 
         dbHelpers = new DBHelpers(this);
-        sb = dbHelpers.getWritableDatabase();
+
         mExampleList = new ArrayList<ExampleItem>();
 
         intent = getIntent();
@@ -127,5 +123,11 @@ public class TotalStat extends AppCompatActivity {
 
     public void EndActivity(View view) {
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelpers.close();
     }
 }

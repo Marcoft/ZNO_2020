@@ -3,16 +3,20 @@ package learn.zno.znostudy;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ThemesQuestions extends AppCompatActivity {
 
     CheckBox checkbox1,checkbox2,checkbox3,checkbox4,checkbox5,checkbox6,checkbox7,checkbox8,checkbox9,checkbox10,checkbox11,checkbox12,checkbox13,checkboxAll;
     TextView alltextCheck;
+
+    Button next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,10 @@ public class ThemesQuestions extends AppCompatActivity {
         checkbox12 = (CheckBox) findViewById(R.id.checkbox12);
         checkbox13 = (CheckBox) findViewById(R.id.checkbox13);
         checkboxAll = (CheckBox) findViewById(R.id.checkboxAll);
+
+        next = (Button) findViewById(R.id.next);
+        next.setEnabled(true);
+        next.setClickable(true);
 
         alltextCheck = (TextView) findViewById(R.id.TextCheckAll);
 
@@ -149,8 +157,19 @@ public class ThemesQuestions extends AppCompatActivity {
         }else{
             intent.putExtra("checkbox13", "false");
         }
-        startActivity(intent);
+        startActivityForResult(intent,1);
+        next.setEnabled(false);
+        next.setClickable(false);
      }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == 1){
+            next.setEnabled(true);
+            next.setClickable(true);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void finish(View view) {

@@ -387,4 +387,5 @@ public class TrueOrFalse extends AppCompatActivity {
     public void finish(View view) {
         finish();
     }
+
 }

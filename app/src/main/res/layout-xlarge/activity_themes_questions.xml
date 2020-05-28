@@ -28,14 +28,14 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:onClick="finish"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
                     android:src="@drawable/back"/>
 
                 <TextView
-                    android:paddingRight="60dp"
-                    android:gravity="center_horizontal"
-                    android:layout_gravity="center_horizontal"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:layout_gravity="center"
                     android:typeface="normal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -434,6 +434,7 @@
     </ScrollView>
 
     <Button
+        android:id="@+id/next"
         android:textColor="#000000"
         android:typeface="serif"
         android:onClick="Next"

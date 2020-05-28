@@ -1,11 +1,11 @@
 package learn.zno.znostudy;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -13,13 +13,13 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import learn.zno.znostudy.TotalStats.ChoiseTotalStats;
-import learn.zno.znostudy.TotalStats.TotalStat;
 import learn.zno.znostudy.db.DBHelpers;
 import learn.zno.znostudy.db.DateDb;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String firstStartApp = "first_start";
+    private static final String firstStartApp = "second_start";
+    private static final String notfirstStartApp = "notFirst_start";
 
     private long backPressedTime;
     private Toast backToast;
@@ -28,33 +28,93 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog.Builder builder;
     AlertDialog alert ;
 
+    Button Test,ZNO,TotalStat,TrueFalse,FindMatch,OneExtra,ShareFriend;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Test = findViewById(R.id.Test);
+        ZNO = findViewById(R.id.ZNO);
+        TotalStat = findViewById(R.id.TotalStat);
+        TrueFalse = findViewById(R.id.TrueFalse);
+        FindMatch = findViewById(R.id.FindMatch);
+        OneExtra = findViewById(R.id.OneExtra);
+        ShareFriend = findViewById(R.id.ShareFriend);
+        Test.setEnabled(true);
+        ZNO.setEnabled(true);
+        TotalStat.setEnabled(true);
+        TrueFalse.setEnabled(true);
+        FindMatch.setEnabled(true);
+        OneExtra.setEnabled(true);
+        ShareFriend.setEnabled(true);
+        Test.setClickable(true);
+        ZNO.setClickable(true);
+        TotalStat.setClickable(true);
+        TrueFalse.setClickable(true);
+        FindMatch.setClickable(true);
+        OneExtra.setClickable(true);
+        ShareFriend.setClickable(true);
+
         dbHelpers = new DBHelpers(this);
 
-        SharedPreferences sp = getSharedPreferences(firstStartApp, MODE_PRIVATE);
-        boolean firstStart = sp.getBoolean("start", true);
-        if(firstStart) {
-            sp.edit().putBoolean("start", false).apply();
+        SharedPreferences sp = getSharedPreferences(firstStartApp, MODE_PRIVATE); // For First Download App
+        SharedPreferences sp2 = getSharedPreferences(notfirstStartApp, MODE_PRIVATE); // For Update App
+        SharedPreferences previous = getSharedPreferences("first_start", MODE_PRIVATE); // Delete previous version
+
+        boolean firstStart = false;
+        boolean notFirstStart = false;
+        if (sp != null) {
+            firstStart = sp.getBoolean("start", true);
+        }
+        if (sp2 != null) {
+            notFirstStart = sp2.getBoolean("start", true);
+        }
+
+        if(firstStart && notFirstStart) {
+            if(previous != null) {
+                SharedPreferences.Editor editor = previous.edit().clear();
+                editor.apply();
+            }
+            this.deleteDatabase("DBHelpers.db");
             builder = new AlertDialog.Builder(this);
-            mt = new MyTask();  //TODO Another Thread for loading BD
+            mt = new MyTask("Завантаження БД", "Зачекайте, будь ласка, поки триває завантаження бази даних. Не закривайте додаток.","Завантаження даних закінчено");  //TODO Another Thread for loading BD
             mt.execute();
+            sp.edit().putBoolean("start", false).apply();
+            sp2.edit().putBoolean("start", false).apply();
+        } else if(notFirstStart && !firstStart){
+            if(previous != null) {
+                SharedPreferences.Editor editor = previous.edit().clear();
+                editor.apply();
+            }
+            this.deleteDatabase("DBHelpers.db");
+            builder = new AlertDialog.Builder(this);
+            mt = new MyTask("Оновлення БД", "Зачекайте, будь ласка, поки триває оновлення бази даних. Не закривайте додаток.","Оновлення даних закінчено");  //TODO Another Thread for loading BD
+            mt.execute();
+            sp2.edit().putBoolean("start", false).apply();
         }
     }
 
     MyTask mt;
-
+    //Another Thread
     private class MyTask extends AsyncTask<Void, Void, Void> {
+        String title = "";
+        String message = "";
+        String end = "";
+
+        public MyTask(String title, String message , String end) {
+            this.title = title;
+            this.message = message;
+            this.end = end;
+        }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            builder.setTitle("Завантаження БД");
+            builder.setTitle(title);
             builder.setCancelable(false);
-            builder.setMessage("Зачекайте, будь ласка, поки триває завантаження бази даних. Не закривайте додаток.");
+            builder.setMessage(message);
             alert = builder.create();
             alert.show(); // Show Alert Dialog
 
@@ -70,25 +130,32 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             alert.dismiss(); // Cancel Alert Dialog after End load date from DB
-            Toast.makeText(MainActivity.this, "Завантаження даних закінчено", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, end, Toast.LENGTH_SHORT).show();
         }
     }
 
+
     public void Test(View view) {
         Intent intent = new Intent(this,ThemesQuestions.class);
-        startActivity(intent);
+        startActivityForResult(intent,4);
+        Test.setEnabled(false);
+        Test.setClickable(false);
     }
 
     public void StatisticaTotal(View view) {
         Intent intent = new Intent(this, ChoiseTotalStats.class);
-        startActivity(intent);
+        startActivityForResult(intent,6);
+        TotalStat.setEnabled(false);
+        TotalStat.setClickable(false);
     }
 
     public void ShareFriends(View view) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id=learn.zno.znostudy");
-        startActivity(intent);
+        startActivityForResult(intent,7);
+        ShareFriend.setEnabled(false);
+        ShareFriend.setClickable(false);
     }
 
 
@@ -115,22 +182,30 @@ public class MainActivity extends AppCompatActivity {
 
     public void Victoryna(View view) {
         Intent intent = new Intent(this,ChoiseZNOYear.class);
-        startActivity(intent);
+        startActivityForResult(intent,5);
+        ZNO.setEnabled(false);
+        ZNO.setClickable(false);
     }
 
     public void OneExtra(View view) {
         Intent intent = new Intent(this,OneExtra.class);
         startActivityForResult(intent,3);
+        OneExtra.setEnabled(false);
+        OneExtra.setClickable(false);
     }
 
     public void TrueFalse(View view) {
         Intent intent = new Intent(this,TrueOrFalse.class);
         startActivityForResult(intent,1);
+        TrueFalse.setEnabled(false);
+        TrueFalse.setClickable(false);
     }
 
     public void FindMatch(View view) {
         Intent intent = new Intent(this,FindaMatch.class);
         startActivityForResult(intent,2);
+        FindMatch.setEnabled(false);
+        FindMatch.setClickable(false);
     }
 
     @Override
@@ -143,13 +218,33 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("Добре", null)
                         .show();
             }
+            TrueFalse.setEnabled(true);
+            TrueFalse.setClickable(true);
         }
-        /*if(requestCode == 2){
-
+        if(requestCode == 2){ //FindMatch
+            FindMatch.setEnabled(true);
+            FindMatch.setClickable(true);
         }
-        if(requestCode == 3){
-
-        }*/
+        if(requestCode == 3){ //OneExtra
+            OneExtra.setEnabled(true);
+            OneExtra.setClickable(true);
+        }
+        if(requestCode == 4){ //TEST
+            Test.setEnabled(true);
+            Test.setClickable(true);
+        }
+        if(requestCode == 5){ //ZNO
+            ZNO.setEnabled(true);
+            ZNO.setClickable(true);
+        }
+        if (requestCode == 6){ //StatisticalTotal
+            TotalStat.setEnabled(true);
+            TotalStat.setClickable(true);
+        }
+        if(requestCode == 7){ //ShareFriends
+            ShareFriend.setEnabled(true);
+            ShareFriend.setClickable(true);
+        }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -1071,6 +1166,12 @@ public class MainActivity extends AppCompatActivity {
         dbHelpers.addData(new DateDb(600,"Царівна Мавка, Лукаш, дядько Лев, мати Лукаша, Килина, Лісовик, Перелесник, Русалка - персонажі твору","«Лісова пісня»","«Тіні забутих предків»","«Модри камінь»","«Зачарована Десна»"));
         dbHelpers.addData(new DateDb(601,"Степан Радченко, Надійка, Левко, Ганнуся та Нюся, Лука Гнідий, Тамара Василівна (Мусінька) - персонажі твору","«Місто»","«Тигролови»","«Мина Мазайло»","«Мартин Боруля»"));
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelpers.close();
     }
 
 }

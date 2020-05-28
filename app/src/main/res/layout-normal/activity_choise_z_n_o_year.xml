@@ -27,6 +27,7 @@
                 android:src="@drawable/back"/>
 
             <TextView
+                android:textColor="#000"
                 android:typeface="normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

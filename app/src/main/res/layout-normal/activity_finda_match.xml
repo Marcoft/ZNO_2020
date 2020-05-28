@@ -24,6 +24,7 @@
             android:src="@drawable/back"/>
 
         <TextView
+            android:textColor="#000"
             android:layout_gravity="center"
             android:typeface="serif"
             android:textStyle="bold"

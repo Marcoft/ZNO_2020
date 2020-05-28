@@ -493,4 +493,10 @@ public class TestStart extends AppCompatActivity {
     public void finish(View view) {
         finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelpers.close();
+    }
 }

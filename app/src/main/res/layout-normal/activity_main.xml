@@ -40,6 +40,7 @@
 
 
         <Button
+            android:id="@+id/Test"
             android:typeface="serif"
             android:background="@drawable/sumabutton2"
             android:textColor="#fff"
@@ -55,6 +56,7 @@
             />
 
         <Button
+            android:id="@+id/ZNO"
             android:typeface="serif"
             android:background="@drawable/sumabutton2"
             android:textColor="#fff"
@@ -70,6 +72,7 @@
             />
 
         <Button
+            android:id="@+id/TotalStat"
             android:typeface="serif"
             android:background="@drawable/sumabutton2"
             android:textColor="#fff"
@@ -85,6 +88,7 @@
             />
 
         <Button
+            android:id="@+id/TrueFalse"
             android:typeface="serif"
             android:background="@drawable/sumabutton2"
             android:textColor="#fff"
@@ -100,6 +104,7 @@
             />
 
         <Button
+            android:id="@+id/FindMatch"
             android:typeface="serif"
             android:background="@drawable/sumabutton2"
             android:textColor="#fff"
@@ -116,6 +121,7 @@
 
 
         <Button
+            android:id="@+id/OneExtra"
             android:typeface="serif"
             android:background="@drawable/sumabutton2"
             android:textColor="#fff"
@@ -133,6 +139,7 @@
 
 
         <Button
+            android:id="@+id/ShareFriend"
             android:typeface="serif"
             android:background="@drawable/sumabutton2"
             android:textColor="#fff"

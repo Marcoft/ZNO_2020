@@ -74,9 +74,11 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
     //TODO Add Date in a BD for test
     @Override
     public void addData(DateDb dateDb) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = null;
 
         try {
+            db = this.getWritableDatabase();
+
             ContentValues values = new ContentValues();
             values.put("id", dateDb.getId());
             values.put("questions", dateDb.getQuestion());
@@ -89,18 +91,28 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
             db.insert("questionZNO", null, values);
             db.close();
         } catch (SQLiteException e) {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
             e.printStackTrace();
         }
     }
 
     @Override
     public DateDb getDate(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }
 
-        Cursor cursor = db.query("questionZNO", new String[] { "id",
-                        "questions", "answ1", "answ2" , "answ3", "answ4", "answ5" }, "id" + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.query("questionZNO", new String[] { "id",
+                            "questions", "answ1", "answ2" , "answ3", "answ4", "answ5" }, "id" + "=?",
+                    new String[] { String.valueOf(id) }, null, null, null, null);
+        }
 
         if (cursor != null){
             cursor.moveToFirst();
@@ -114,7 +126,9 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
         if (cursor != null) {
             cursor.close();
         }
-        db.close();
+        if (db != null) {
+            db.close();
+        }
 
         return dateDb;
     }
@@ -124,10 +138,18 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
         List<DateDb> datelist = new ArrayList<DateDb>();
         String selectQuery = "SELECT  * FROM " + "questionZNO";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(selectQuery, null);
+        }
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 DateDb date = new DateDb();
                 date.setId(Integer.parseInt(cursor.getString(0)));
@@ -144,7 +166,9 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
         if (cursor != null) {
             cursor.close();
         }
-        db.close();
+        if (db != null) {
+            db.close();
+        }
 
         return datelist;
     }
@@ -152,9 +176,10 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
     //TODO Add Date for statistics
     @Override
     public void addDataTotalStats(DateDbTotalStats dateDb) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = null;
 
         try {
+            db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("idText", dateDb.getIdText());
             values.put("typeTest", dateDb.getTypeTest());
@@ -167,18 +192,28 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
             db.insert("totalStatistics", null, values);
             db.close();
         } catch (SQLiteException e) {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
             e.printStackTrace();
         }
     }
 
     @Override
     public DateDbTotalStats getDateTotalStats(String id) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }
 
-        Cursor cursor = db.query("totalStatistics", new String[] { "idText",
-                        "typeTest", "statsTest", "dateTest" , "CountAnswers", "startSize", "endSize" }, "idText" + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.query("totalStatistics", new String[] { "idText",
+                            "typeTest", "statsTest", "dateTest" , "CountAnswers", "startSize", "endSize" }, "idText" + "=?",
+                    new String[] { String.valueOf(id) }, null, null, null, null);
+        }
 
         if (cursor != null){
             cursor.moveToFirst();
@@ -192,7 +227,9 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
         if (cursor != null) {
             cursor.close();
         }
-        db.close();
+        if (db != null) {
+            db.close();
+        }
 
         return dateDb;
     }
@@ -200,12 +237,20 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
     @Override
     public List<DateDbTotalStats> getAllTotalStats() {
         List<DateDbTotalStats> datelist = new ArrayList<DateDbTotalStats>();
-        String selectQuery = "SELECT  * FROM " + "totalStatistics";
+        String selectQuery = "SELECT  * FROM " + "totalStatistics" + " ORDER BY idText ASC ";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(selectQuery, null);
+        }
 
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 DateDbTotalStats date = new DateDbTotalStats();
                 date.setIdText(cursor.getString(0));
@@ -222,23 +267,66 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
         if (cursor != null) {
             cursor.close();
         }
-        db.close();
+        if (db != null) {
+            db.close();
+        }
+
+        return datelist;
+    }
+
+    @Override
+    public List<DateDbTotalStats> getAllTotalStatsAndSort(String name) {
+        List<DateDbTotalStats> datelist = new ArrayList<DateDbTotalStats>();
+        String selectQuery = "SELECT  * FROM " + "totalStatistics" + " ORDER BY " + name + " ";
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+        }catch (SQLiteException e) {
+            e.printStackTrace();
+        }
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(selectQuery, null);
+        }
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                DateDbTotalStats date = new DateDbTotalStats();
+                date.setIdText(cursor.getString(0));
+                date.setTypeTest(cursor.getString(1));
+                date.setStatsTest(cursor.getString(2));
+                date.setDateTest(cursor.getString(3));
+                date.setCountAnswers(cursor.getInt(4));
+                date.setStartSize(cursor.getInt(5));
+                date.setEndSize(cursor.getInt(6));
+
+                datelist.add(date);
+            } while (cursor.moveToNext());
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        if (db != null) {
+            db.close();
+        }
 
         return datelist;
     }
 
     @Override
     public void deleteDateTotalStats(String id) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = null;
 
         try {
-
+            db = this.getWritableDatabase();
             String[] args = new String[]{id};
             db.delete("totalStatistics", "idText" + "=?", args);
 
             db.close();
         } catch (SQLiteException e) {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
             e.printStackTrace();
         }
     }
@@ -247,8 +335,10 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
     //TODO Add Date inside Statistics
     @Override
     public void addDataInStats(DateDbStats dateDb) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = null;
+
         try {
+            db = this.getWritableDatabase();
             ContentValues values = new ContentValues();
             values.put("id", dateDb.getId());
             values.put("Questions", dateDb.getQuestion());
@@ -258,7 +348,9 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
             db.insert("dateTotalStatistics", null, values);
             db.close();
         } catch (SQLiteException e) {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
             e.printStackTrace();
         }
 
@@ -266,11 +358,19 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
 
     @Override
     public DateDbStats getDateFromStats(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }
 
-        Cursor cursor = db.query("dateTotalStatistics", new String[] { "id",
-                        "Questions", "YourAnswer", "RightAnswer" }, "id" + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.query("dateTotalStatistics", new String[] { "id",
+                            "Questions", "YourAnswer", "RightAnswer" }, "id" + "=?",
+                    new String[] { String.valueOf(id) }, null, null, null, null);
+        }
 
         if (cursor != null){
             cursor.moveToFirst();
@@ -284,7 +384,9 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
         if (cursor != null) {
             cursor.close();
         }
-        db.close();
+        if (db != null) {
+            db.close();
+        }
 
         return dateDb;
     }
@@ -294,10 +396,19 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
         List<DateDbStats> datelist = new ArrayList<DateDbStats>();
         String selectQuery = "SELECT  * FROM " + "dateTotalStatistics";
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        SQLiteDatabase db = null;
+        try {
+            db = this.getWritableDatabase();
+        } catch (SQLiteException e) {
+            e.printStackTrace();
+        }
 
-        if (cursor.moveToFirst()) {
+        Cursor cursor = null;
+        if (db != null) {
+            cursor = db.rawQuery(selectQuery, null);
+        }
+
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 DateDbStats date = new DateDbStats();
                 date.setId(cursor.getInt(0));
@@ -311,21 +422,25 @@ public class DBHelpers extends SQLiteOpenHelper implements methodDb, methodDbTot
         if (cursor != null) {
             cursor.close();
         }
-        db.close();
+        if (db != null) {
+            db.close();
+        }
 
         return datelist;
     }
 
     @Override
     public void deleteDateFromStats(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
+        SQLiteDatabase db = null;
         try {
+            db = this.getWritableDatabase();
             db.delete("dateTotalStatistics", "id" + "=?", new String[]{String.valueOf(id)});
 
             db.close();
         } catch (SQLiteException e) {
-            db.close();
+            if (db != null) {
+                db.close();
+            }
             e.printStackTrace();
         }
 

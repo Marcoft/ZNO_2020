@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ЗНО 2020: Українська література</string>
+
+    <string-array name="sortSpinner">
+        <item>Сортування за назвою (спадання)</item>
+        <item>Сортування за назвою (зростання)</item>
+        <item>Сортування за типом (спочатку ЗНО)</item>
+        <item>Сортування за типом (спочатку Тести)</item>
+    </string-array>
 </resources>

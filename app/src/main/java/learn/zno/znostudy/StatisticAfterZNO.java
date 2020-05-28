@@ -1,12 +1,12 @@
 package learn.zno.znostudy;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -161,20 +161,44 @@ public class StatisticAfterZNO extends AppCompatActivity {
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         String timeText = timeFormat.format(currentDate);
 
-        List<DateDbTotalStats> listDateDbTotalStats = dbHelpers.getAllTotalStats();
-        List<DateDbStats> listDateDbStats = dbHelpers.getAllDateFromStats();
+        LoadPreferences();
+        numberStat = lastPositionNumber;
+        endDate = lastPositionDate;
 
-        numberStat = listDateDbTotalStats.size();
-        endDate = listDateDbStats.size();
-
-        numberStat++;
-        endDate++;
+        if(numberStat == 0){
+            numberStat++;
+        }
+        if(endDate == 0){
+            endDate++;
+        }
         dbHelpers.addDataTotalStats(new DateDbTotalStats("Статистика №" + numberStat, "ЗНО", rightAnswers + "/20", timeText + "  " + dateText, 20, endDate, endDate + 20 ));
         for (int i = 1; i <= 20;i ++){
             dbHelpers.addDataInStats(new DateDbStats(endDate, quest.get(i-1),result.get(i-1), answe1.get(i-1)));
             endDate++;
         }
+        numberStat++;
 
+        lastPositionNumber = numberStat;
+        lastPositionDate = endDate;
+
+        saveActivityPreferences();
+
+    }
+
+    int lastPositionNumber = 0;
+    int lastPositionDate = 0;
+    private void saveActivityPreferences() {
+        SharedPreferences activityPreferences = getSharedPreferences("SavedPosition", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = activityPreferences.edit();
+        editor.putInt("lastPositionNumber", lastPositionNumber);
+        editor.putInt("lastPositionDate", lastPositionDate);
+        editor.apply();
+    }
+
+    private void LoadPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SavedPosition", MODE_PRIVATE);
+        lastPositionNumber = sharedPreferences.getInt("lastPositionNumber",0);
+        lastPositionDate = sharedPreferences.getInt("lastPositionDate",0);
     }
 
 
@@ -188,5 +212,11 @@ public class StatisticAfterZNO extends AppCompatActivity {
     public void EndActivity(View view) {
         dbHelpers.close();
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelpers.close();
     }
 }

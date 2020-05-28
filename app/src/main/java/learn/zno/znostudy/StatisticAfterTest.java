@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -51,7 +50,6 @@ public class StatisticAfterTest extends AppCompatActivity {
         setContentView(R.layout.activity_statistic_after_test);
         dbHelpers = new DBHelpers(this);
         RightAnswers = (TextView) findViewById(R.id.RightAnswers);
-
 
         mExampleList = new ArrayList<ExampleItem>();
         result.clear();
@@ -102,22 +100,46 @@ public class StatisticAfterTest extends AppCompatActivity {
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         String timeText = timeFormat.format(currentDate);
 
-        List<DateDbTotalStats> listDateDbTotalStats = dbHelpers.getAllTotalStats();
-        List<DateDbStats> listDateDbStats = dbHelpers.getAllDateFromStats();
+        LoadPreferences();
 
-        numberStat = listDateDbTotalStats.size();
-        endDate = listDateDbStats.size();
+        numberStat = lastPositionNumber;
+        endDate = lastPositionDate;
 
-        numberStat++;
-        endDate++;
+        if(numberStat == 0){
+            numberStat++;
+        }
+        if(endDate == 0){
+            endDate++;
+        }
         dbHelpers.addDataTotalStats(new DateDbTotalStats("Статистика №" + numberStat, "Тест", rightAnswer + "/" + allQuestion, timeText + "  " + dateText, allQuestion,endDate,endDate + allQuestion));
         for (int i = 1; i <= allQuestion;i ++){
             dbHelpers.addDataInStats(new DateDbStats(endDate, questi.get(i-1),result.get(i-1), RightAnswer.get(i-1)));
             endDate++;
         }
+        numberStat++;
+
+        lastPositionNumber = numberStat;
+        lastPositionDate = endDate;
+
+        saveActivityPreferences();
 
     }
 
+    int lastPositionNumber = 0;
+    int lastPositionDate = 0;
+    private void saveActivityPreferences() {
+        SharedPreferences sPref = getSharedPreferences("SavedPosition", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sPref.edit();
+        editor.putInt("lastPositionNumber", lastPositionNumber);
+        editor.putInt("lastPositionDate", lastPositionDate);
+        editor.apply();
+    }
+
+    private void LoadPreferences() {
+        SharedPreferences sharedPreferences = getSharedPreferences("SavedPosition", MODE_PRIVATE);
+        lastPositionNumber = sharedPreferences.getInt("lastPositionNumber",0);
+        lastPositionDate = sharedPreferences.getInt("lastPositionDate",0);
+    }
 
     @Override
     public void onBackPressed() {
@@ -127,5 +149,11 @@ public class StatisticAfterTest extends AppCompatActivity {
 
     public void EndActivity(View view) {
         finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelpers.close();
     }
 }

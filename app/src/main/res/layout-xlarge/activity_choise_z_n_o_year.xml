@@ -19,14 +19,18 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_marginRight="20dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
                 android:onClick="finish"
                 android:layout_marginLeft="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 android:src="@drawable/back"/>
 
             <TextView
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textColor="#000"
                 android:typeface="normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

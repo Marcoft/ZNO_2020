@@ -960,6 +960,7 @@ public class ZNOTest extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        super.onDestroy();
         result.clear();
         quest.clear();
         answe1.clear();
@@ -968,7 +969,7 @@ public class ZNOTest extends AppCompatActivity {
         answe4.clear();
         answe5.clear();
         RightAnswer.clear();
-        super.onDestroy();
+        dbHelpers.close();
     }
 
     @Override
@@ -981,4 +982,6 @@ public class ZNOTest extends AppCompatActivity {
     public void finish(View view) {
         finish();
     }
+
+
 }
